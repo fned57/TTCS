@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.ConnectionBuilder;
 
 
 @Entity
@@ -25,6 +26,17 @@ public class User {
         private String avt;
 
         private String Quyen;
+
+    public User(String email, String password, String quyen) {
+        this.email = email;
+        this.Password = password;
+        this.Quyen = quyen;
+    }
+    public User() {
+
+    }
+
+
 
     public Integer getId() {
         return id;

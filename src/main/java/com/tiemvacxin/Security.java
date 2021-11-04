@@ -18,6 +18,7 @@ public class Security  extends WebSecurityConfigurerAdapter {
 
     @Autowired
     CostumUserServer costumUserServer;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -27,6 +28,7 @@ public class Security  extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/**").permitAll()
+                .antMatchers("/user").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -42,6 +44,9 @@ public class Security  extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication(costumUserServer).passwordEncoder(passwordEncoder());
+//        auth.inMemoryAuthentication(costumUserServer).passwordEncoder(passwordEncoder());
+//        auth.authenticationProvider(custom);
+//        auth.userDetailsService(costumUserServer);
+        auth.userDetailsService(costumUserServer).passwordEncoder(passwordEncoder());
     }
 }
